@@ -1,13 +1,16 @@
+# import libraries for Sense HAT, delays, and choosing random letters
 from sense_hat import SenseHat
 from time import sleep
-import random
-sense = SenseHat()
+from random import choice
 
-w = (0, 0, 0)
-l = (200, 200, 200)
-b = (0, 70, 150)
+sense = SenseHat() # initialise Sense HAT
 
-nun = [
+w = (0, 0, 0) # set background color to off
+l = (255, 255, 255) # set color of letters to white
+b = (0, 70, 150) # set driedel color to blue
+
+# creates an array of pixels for the nun
+nun = [ 
     w, w, w, b, b, w, w, w,
     w, w, w, b, b, w, w, w,
     b, b, l, l, l, b, b, b,
@@ -18,6 +21,7 @@ nun = [
     w, w, w, b, b, w, w, w,
 ]
 
+# creates an array of pixels for the gimmel
 gimmel = [
     w, w, w, b, b, w, w, w,
     w, w, w, b, b, w, w, w,
@@ -29,6 +33,7 @@ gimmel = [
     w, w, w, b, b, w, w, w,
 ]
 
+# creates an array of pixels for the hey
 hey = [
     w, w, w, b, b, w, w, w,
     w, w, w, b, b, w, w, w,
@@ -40,6 +45,7 @@ hey = [
     w, w, w, b, b, w, w, w,
 ]
 
+# creates an array of pixels for the shin
 shin = [
     w, w, w, b, b, w, w, w,
     w, w, w, b, b, w, w, w,
@@ -51,15 +57,17 @@ shin = [
     w, w, w, b, b, w, w, w,
 ]
 
-display_letters = [nun, gimmel, hey, shin]
+# create a list of the letters to choose from
+letters = [nun, gimmel, hey, shin]
 
+# our main code loop to run forever
 while True:
-    x, y, z = sense.get_accelerometer_raw().values()
-    x = abs(x)
-    y = abs(y)
-    z = abs(z)
-    if x > 2 or y > 2 or z > 2:
-        for a in range(10):
+    x, y, z = sense.get_accelerometer_raw().values() # capture the data from the accelerometer in x, y, and z coordinates
+    x = abs(x) # make the coordinates positive numbers  
+    y = abs(y) # with absolute value, the distance 
+    z = abs(z) # between a number and zero
+    if x > 2 or y > 2 or z > 2: # check to see if the Raspberry Pi was shaken
+        for a in range(10): # scroll through the letters 10 times
             sense.set_pixels(nun)
             sleep(.07)
             sense.set_pixels(gimmel)
@@ -68,5 +76,5 @@ while True:
             sleep(.07)
             sense.set_pixels(shin)
             sleep(.07)
-        result = random.choice(display_letters)
-        sense.set_pixels(result)
+        result = choice(letters) # choose a random letter
+        sense.set_pixels(result) # display the random letter
