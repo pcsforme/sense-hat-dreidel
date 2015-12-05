@@ -1,5 +1,5 @@
 # Sense HAT Dreidel
-Create a dreidel with a Raspberry Pi and Sense HAT!
+Create a dreidel with a Raspberry Pi and Sense HAT! When you shake the Raspberry Pi, the dreidel will spin and land on a random letter.
 
 ![The finished project](https://cloud.githubusercontent.com/assets/13228241/11609400/a9afa34e-9b4b-11e5-87a1-532fef1691fb.jpg)
 
